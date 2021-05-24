@@ -39,6 +39,14 @@ function Draw()
     });
 }
 
+function DrawCircle(x, y)
+{
+    ctx.fillStyle = "blue"
+    ctx.beginPath()
+    ctx.arc(x, y, 10, 0, 2*Math.PI);
+    ctx.fill();
+}
+
 
 
 class Square{
@@ -52,13 +60,16 @@ class Square{
         this.vert[2] = new Vec3(x+w, y+h, 0);
         this.vert[3] = new Vec3(x, y+h, 0);
         this.c = c;
-        console.log(this)
 
+        this.fallRate = (Math.random()*4)+1;
+        this.rot = new Vec3(Math.random()/10, Math.random()/10, Math.random()/10);
         Register(this);
     }
 
     Translate(x, y)
     {
+        this.x += x;
+        this.y += y;
         this.vert.map(v =>{
             v.x += x;
             v.y += y;
@@ -77,6 +88,10 @@ class Square{
         let cosThetaz = Math.cos(thetaz);
 
         this.vert.map(v =>{
+
+            v.x -= this.x + 50;
+            v.y -= this.y + 50;
+
             let x = v.x;
             let y = v.y;
             let z = v.z;
@@ -97,6 +112,9 @@ class Square{
 
             v.x = x * cosThetaz + z * sinThetaz;
             v.z = z * cosThetaz - x * sinThetaz;
+
+            v.x += this.x + 50;
+            v.y += this.y + 50; 
         })
     }
 }
