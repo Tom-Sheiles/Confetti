@@ -1,3 +1,9 @@
+html
+{
+    background: rgb(59, 59, 59);
+    color: white;
+}
+
 canvas{
     position: absolute;
     left: 0;
